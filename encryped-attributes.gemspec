@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.files         = Dir['{lib,spec}/*']
   gem.test_files    = Dir['spec/*']
-  gem.name          = "encrypted_column"
+  gem.name          = "encrypted-attributes"
   gem.require_paths = ["lib"]
   gem.version       = '0.0.1'
 

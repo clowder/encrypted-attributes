@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe EncryptedColumn do
+describe EncryptedAttributes do
   let(:key) { 'e0cfe841f51d29c0e0a1c51391ca04a6' }
   let(:iv)  { '7b94eae611106dc190b10f40e2d0fde0' }
 
   let(:encrypto_class) {
     Class.new(ActiveRecord::Base) do
       self.table_name = 'encrypto'
-      extend EncryptedColumn
+      extend EncryptedAttributes
     end
   }
 
   let(:serialized_encrypto_class) {
     Class.new(ActiveRecord::Base) do
       self.table_name = 'encrypto'
-      extend EncryptedColumn
+      extend EncryptedAttributes
 
       serialize :description
 
@@ -26,7 +26,6 @@ describe EncryptedColumn do
     Rails = OpenStruct.new(:encrypted_column => OpenStruct.new(:key => nil, :iv => nil))
     Rails.encrypted_column.key = key
     Rails.encrypted_column.iv = iv
-    ActiveRecord::IdentityMap.enabled = false
   end
 
   it "allows you to specify the columns to be encrypted" do

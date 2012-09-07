@@ -1,30 +1,28 @@
-module EncryptedColumn
+module EncryptedAttributes
   module AR32
-    def encrypted_columns
-      @encrypted_columns
+    def encrypted_attributes
+      @encrypted_attributes
     end
 
     def encrypt(column_name)
-      @encrypted_columns = [] unless defined? @encrypted_columns
-      @encrypted_columns << column_name
+      @encrypted_attributes = [] unless defined? @encrypted_columns
+      @encrypted_attributes << column_name.to_s
     end
 
     def define_attribute_methods(*args)
-      self.encrypted_columns.each do |column|
-        column_name = column.to_s
-
+      self.encrypted_attributes.each do |column|
         define_method(column) do
           aes   = SimpleAES.new(:key => Rails.encrypted_column.key, :iv => Rails.encrypted_column.iv)
-          coder = self.class.serialized_attributes[column.to_s]
+          coder = self.class.serialized_attributes[column]
 
-          value = aes.decrypt(read_attribute(column.to_s))
+          value = aes.decrypt(read_attribute(column))
 
           coder ? coder.load(value) : value
         end
 
         define_method("#{ column }=".to_sym) do |value|
           aes            = SimpleAES.new(:key => Rails.encrypted_column.key, :iv => Rails.encrypted_column.iv)
-          coder          = self.class.serialized_attributes[column.to_s]
+          coder          = self.class.serialized_attributes[column]
 
           value          = coder ? coder.dump(value) : value
           encrypted_data = aes.encrypt(value)

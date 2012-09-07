@@ -1,7 +1,7 @@
 PATH
-  remote: /Users/Chris/clowder/active-record-mysql-aes
+  remote: /Users/Chris/clowder/encrypted-attributes
   specs:
-    encrypted_column (0.0.1)
+    encrypted-attributes (0.0.1)
 
 GEM
   remote: http://rubygems.org/
@@ -32,7 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 2.3.0)
-  encrypted_column!
+  encrypted-attributes!
   mysql2 (~> 0.2.0)
   pry
   rspec

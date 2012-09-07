@@ -1,18 +1,15 @@
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 
 require 'rubygems'
-require 'bundler/setup'
-
-require 'pry'
-require 'active_record'
-require 'mysql2'
-require 'encrypted-column'
+require 'bundler'
+require 'ostruct'
+Bundler.require(:default, :test)
 
 ActiveRecord::Base.establish_connection({
   :adapter  => 'mysql2',
   :host     => 'localhost',
-  :database => 'aes_test',
-  :username => 'aes_test',
+  :database => 'encrypted_attributes_test',
+  :username => 'root',
   :encoding => 'utf8'
 })
 
