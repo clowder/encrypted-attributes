@@ -1,24 +1,6 @@
-# Active::Record::Mysql::Aes
+[![Build Status](https://secure.travis-ci.org/clowder/encrypted-attributes.png)](http://travis-ci.org/clowder/encrypted-attributes)
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'active-record-mysql-aes'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install active-record-mysql-aes
-
-## Usage
-
-TODO: Write usage instructions here
+# EncryptedColumn
 
 ## Contributing
 
