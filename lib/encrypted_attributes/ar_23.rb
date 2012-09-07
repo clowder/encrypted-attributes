@@ -16,8 +16,7 @@ module EncryptedAttributes
     def define_attribute_methods(*args)
       self.encrypted_attributes.each do |column|
         define_method(column) do
-          aes = SimpleAES.new(:key => Rails.encrypted_column.key, :iv => Rails.encrypted_column.iv)
-          object_from_yaml(aes.decrypt(read_attribute(column)))
+          object_from_yaml(EncryptedAttributes.encrypter.decrypt(read_attribute(column)))
         end
       end
 
@@ -36,8 +35,7 @@ module EncryptedAttributes
             value = read_attribute(column_name).to_yaml
           end
 
-          aes            = SimpleAES.new(:key => Rails.encrypted_column.key, :iv => Rails.encrypted_column.iv)
-          encrypted_data = aes.encrypt(value)
+          encrypted_data = EncryptedAttributes.encrypter.encrypt(value)
 
           quoted[column_name] = connection.quote(encrypted_data, column_for_attribute(column_name))
         end

@@ -23,9 +23,7 @@ describe EncryptedAttributes do
   }
 
   before(:all) do
-    Rails = OpenStruct.new(:encrypted_column => OpenStruct.new(:key => nil, :iv => nil))
-    Rails.encrypted_column.key = key
-    Rails.encrypted_column.iv = iv
+    EncryptedAttributes.setup(:key => key, :iv => iv)
   end
 
   it "allows you to specify the columns to be encrypted" do

@@ -12,4 +12,12 @@ module EncryptedAttributes
       fail "Unsupported version of ActiveRecord."
     end
   end
+
+  def self.encrypter
+    @encrypter
+  end
+
+  def self.setup(attrs={})
+    @encrypter = SimpleAES.new(:key => attrs.fetch(:key), :iv => attrs.fetch(:iv))
+  end
 end
