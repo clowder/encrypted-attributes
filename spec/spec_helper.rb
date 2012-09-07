@@ -3,6 +3,7 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'rubygems'
 require 'bundler'
 require 'ostruct'
+require 'pry'
 Bundler.require(:default, :test)
 
 ActiveRecord::Base.establish_connection({

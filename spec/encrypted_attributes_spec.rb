@@ -48,6 +48,21 @@ describe EncryptedAttributes do
 
   it "works on serialized columns too" do
     serialized_encrypto_class.create(:description => { :foo => 'bar', :baz => 'bat' })
-    serialized_encrypto_class.last.description.should == { :foo => 'bar', :baz => 'bat' }
+
+    encrypto = serialized_encrypto_class.last
+    encrypto.description.should == { :foo => 'bar', :baz => 'bat' }
+    encrypto.description = { :foo => "This is my fancy class" }
+    encrypto.save
+
+    serialized_encrypto_class.last.description.should == { :foo => 'This is my fancy class' }
+  end
+
+  it "makes it impossible to mutate encrypted serialized objects" do
+    expect {
+      serialized_encrypto_class.create(:description => { :foo => 'bar', :baz => 'bat' })
+
+      encrypto = serialized_encrypto_class.last
+      encrypto.description[:foo] = "This is my fancy class"
+    }.to raise_error(RuntimeError)
   end
 end
