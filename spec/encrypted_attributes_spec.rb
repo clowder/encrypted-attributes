@@ -15,9 +15,16 @@ describe EncryptedAttributes do
     Class.new(ActiveRecord::Base) do
       self.table_name = 'encrypto'
       extend EncryptedAttributes
-
       serialize :description
+      encrypt :description
+    end
+  }
 
+  let(:strict_serialized_encrypto_class) {
+    Class.new(ActiveRecord::Base) do
+      self.table_name = 'encrypto'
+      extend EncryptedAttributes
+      serialize :description, Hash
       encrypt :description
     end
   }
@@ -29,6 +36,14 @@ describe EncryptedAttributes do
   it "allows you to specify the columns to be encrypted" do
     encrypto_class.encrypt(:description)
     encrypto_class.encrypted_attributes.should == ['description']
+  end
+
+  it "doesn't blow up if the encryption target is nil" do
+    foo = serialized_encrypto_class.new
+    foo.description = nil
+    foo.save!
+
+    serialized_encrypto_class.last.description.should be_nil
   end
 
   it "encrypts the data in the database" do
@@ -55,6 +70,14 @@ describe EncryptedAttributes do
     encrypto.save
 
     serialized_encrypto_class.last.description.should == { :foo => 'This is my fancy class' }
+  end
+
+  it "shoulsn't break serialized columns with type enforement" do
+    expect {
+      encrypto = serialized_encrypto_class.new
+      encrypto.description = { :foo => "This is my fancy class" }
+      encrypto.save!
+    }.not_to raise_error
   end
 
   it "makes it impossible to mutate encrypted serialized objects" do

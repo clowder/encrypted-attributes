@@ -13,8 +13,12 @@ module EncryptedAttributes
     end
   end
 
-  def self.encrypter
-    @encrypter
+  def self.encrypt(value)
+    @encrypter.encrypt(value)
+  end
+
+  def self.decrypt(value)
+    @encrypter.decrypt(value)
   end
 
   def self.setup(attrs={})
