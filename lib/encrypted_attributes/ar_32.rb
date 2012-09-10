@@ -13,16 +13,17 @@ module EncryptedAttributes
       self.encrypted_attributes.each do |column|
         define_method(column) do
           coder = self.class.serialized_attributes[column]
-          value = EncryptedAttributes.encrypter.decrypt(read_attribute(column))
+          value = EncryptedAttributes.decrypt(read_attribute(column))
 
-          coder ? coder.load(value) : value
+          value = coder ? coder.load(value) : value
+          value.freeze
         end
 
         define_method("#{ column }=".to_sym) do |value|
           coder = self.class.serialized_attributes[column]
 
           value          = coder ? coder.dump(value) : value
-          encrypted_data = EncryptedAttributes.encrypter.encrypt(value)
+          encrypted_data = EncryptedAttributes.encrypt(value)
 
           write_attribute(column, encrypted_data)
         end
