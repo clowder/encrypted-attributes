@@ -1,6 +1,26 @@
 [![Build Status](https://secure.travis-ci.org/clowder/encrypted-attributes.png)](http://travis-ci.org/clowder/encrypted-attributes)
 
-# EncryptedColumn
+# EncryptedAttributes
+
+## Usage
+
+### Rails 2.3.x
+
+Create an initializer that will configure the EncryptedAttributes module with your Key and IV.
+
+```
+EncryptedAttributes.setup(:key => 'YOUR RANDOM KEY', :iv => 'YOUR RANDOM INITIALIZATION VECTOR')
+```
+
+Encrypt your columns like.
+
+```ruby
+class Deployment < ActiveRecord::Base
+  serialize :secret_config, Hash
+  encrypt :secret_config
+end
+```
+
 
 ## Contributing
 
