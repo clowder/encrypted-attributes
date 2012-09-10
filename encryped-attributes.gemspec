@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{AES encrypted attributes with Rails.}
   gem.homepage      = "http://github.com/clowder/encrypted-attributes"
 
-  gem.files         = Dir['{lib,spec}/*', 'README.md', 'LICENSE']
-  gem.test_files    = Dir['spec/*']
+  gem.files         = Dir['{lib,spec}/**/*', 'README.md', 'LICENSE']
+  gem.test_files    = Dir['spec/**/*']
   gem.name          = "encrypted-attributes"
   gem.require_paths = ["lib"]
   gem.version       = '0.0.1'
