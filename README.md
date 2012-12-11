@@ -4,7 +4,7 @@
 
 ## Usage
 
-### Rails 2.3.x
+### Rails
 
 Create an initializer that will configure the EncryptedAttributes module with your Key and IV.
 
@@ -16,11 +16,12 @@ Encrypt your columns like.
 
 ```ruby
 class Deployment < ActiveRecord::Base
+  extend EncryptedAttributes
+
   serialize :secret_config, Hash
   encrypt :secret_config
 end
 ```
-
 
 ## Contributing
 
