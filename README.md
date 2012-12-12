@@ -23,6 +23,14 @@ class Deployment < ActiveRecord::Base
 end
 ```
 
+## Authors
+
+#### Created and maintained by
+Chris Lowder
+
+#### Patches contributed by
+[Contributor List](https://github.com/clowder/encrypted-attributes/contributors)
+
 ## Contributing
 
 1. Fork it
