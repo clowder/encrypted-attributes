@@ -23,6 +23,26 @@ class Deployment < ActiveRecord::Base
 end
 ```
 
+## Running the intergration tests locally
+
+Ensure you have a MySQL table called `encrypted_attributes_test`.
+
+Running the specs for Rails 2.3.x:
+
+```bash
+export BUNDLE_GEMFILE=gemfiles/rails-2_3.gemfile
+bundle install
+bundle exec rspec spec/
+```
+
+And Rails 3.0.x:
+
+```bash
+export BUNDLE_GEMFILE=gemfiles/rails-3_2.gemfile
+bundle install
+bundle exec rspec spec/
+```
+
 ## Authors
 
 #### Created and maintained by
